@@ -1,0 +1,22 @@
+{
+ "name": "MySKD",
+ "short_name": "MySKD",
+ "start_url": "/",
+ "display": "standalone",
+ "background_color": "#0a4de0",
+ "theme_color": "#0a4de0",
+ "icons": [
+  {
+   "src": "logo-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "logo-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  }
+ ]
+}
