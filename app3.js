@@ -5,13 +5,15 @@ const QNF={TWK:30,TIU:35,TKP:45};
 const mmss=s=>String(Math.max(0,s)/60|0).padStart(2,'0')+':'+String(Math.max(0,s)%60).padStart(2,'0');
 
 /* ---------- header sticky + navigasi ---------- */
+const capNm=s=>String(s||'').replace(/(^|[\s._-])([a-z])/g,(m,a,b)=>a+b.toUpperCase());
+const tglID=()=>{try{return new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}catch(x){return ''}};
 function shell(inner,adm){
  const BK=adm?"V='dash';location.hash=''":({materi:"go('dash')",rank:"go('dash')",brief:"go('dash')",exam:"exitEx()",result:"go('dash')",latihan:"go('dash')"})[V]||'';
  const ic={dash:'🏠',materi:'📚',latihan:'✍️',rank:'🏆'};
  const n=(v,l)=>`<a class="${V==v?'on':''}" onclick="go('${v}')"><i>${ic[v]}</i>${l}</a>`;
  const nav=cur&&!adm&&V!='exam'?`<nav>${n('dash','Dashboard')}${n('materi','Materi')}${n('latihan','Latihan')}${n('rank','Peringkat')}<a onclick="logout()"><i>🚪</i>Keluar</a></nav>`:'';
  const hx=HX;HX='';
- $('app').innerHTML=`<header class="hd"><div class="hd1">${BK?`<button class="back" onclick="${BK}" title="Kembali">${hx?'←':'←'}</button>`:''}<div class="ttl"><b>CAT SKD SIMULATOR</b><span>${adm?'Panel Pemilik':cur?'Halo, '+e(cur):'Silakan masuk'}</span></div>${hx}</div>${nav}</header><main>${inner}</main>`}
+ $('app').innerHTML=`<header class="hd"><div class="hd1">${BK?`<button class="back" onclick="${BK}" title="Kembali">${hx?'←':'←'}</button>`:''}<img class="lg" src="logo-96.png" alt="MySKD"><div class="ttl"><b>MySKD</b><span>${adm?'Panel Pemilik':cur?'Semangat belajar, '+e(capNm(cur))+'! 🔥':'Silakan masuk'}</span><span class="dt">${tglID()}</span></div>${hx}</div>${nav}</header><main>${inner}</main>`}
 function go(v){scrollTo(0,0);V=v;route()}
 
 /* ---------- info passing grade ---------- */
@@ -280,12 +282,3 @@ M.TIU.s=[
 'Passing grade TIU 80 → minimal 16 soal benar dari 35. Isi semua soal.'
 ],k:'Baca ulang halaman ini sebelum ujian. Hafal rumus, bukan tabel panjang.'}
 ];
-
-/* ---------- pengaman: tidak pernah layar kosong ---------- */
-(function(){const a=$('app'),box=(t,m)=>'<div class="card" style="max-width:420px;margin:40px auto;text-align:center"><h3>'+t+'</h3><p class="mu">'+m+'</p><button class="btn" onclick="location.reload()">Muat Ulang</button></div>';
- if(!a.innerHTML.trim())a.innerHTML=box('Memuat…','Mohon tunggu sebentar.');
- const fail=m=>{if(!a.querySelector('header,.hd'))a.innerHTML=box('Terjadi kesalahan','Detail: '+String(m).replace(/[<>&]/g,'')+'<br>Coba Muat Ulang. Jika tetap sama, kirim tulisan ini ke pemilik.')};
- addEventListener('error',ev=>fail(ev.message));addEventListener('unhandledrejection',ev=>fail(ev.reason&&ev.reason.message||ev.reason));
- setTimeout(()=>{if(!a.querySelector('header,.hd'))a.innerHTML=box('Koneksi lambat','Server belum menjawab. Periksa internet lalu Muat Ulang.')},10000)})();
-__log('script utama jalan');addEventListener('hashchange',route);route();
-
