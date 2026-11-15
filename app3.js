@@ -13,7 +13,7 @@ function shell(inner,adm){
  const n=(v,l)=>`<a class="${V==v?'on':''}" onclick="go('${v}')"><i>${ic[v]}</i>${l}</a>`;
  const nav=cur&&!adm&&V!='exam'?`<nav>${n('dash','Dashboard')}${n('materi','Materi')}${n('latihan','Latihan')}${n('rank','Peringkat')}<a onclick="logout()"><i>🚪</i>Keluar</a></nav>`:'';
  const hx=HX;HX='';
- $('app').innerHTML=`<header class="hd"><div class="hd1">${BK?`<button class="back" onclick="${BK}" title="Kembali">${hx?'←':'←'}</button>`:''}<img class="lg" src="logo-96.png" alt="MySKD"><div class="ttl"><b>MySKD</b><span>${adm?'Panel Pemilik':cur?'Semangat belajar, '+e(capNm(cur))+'! 🔥':'Silakan masuk'}</span><span class="dt">${tglID()}</span></div>${hx}</div>${nav}</header><main>${inner}</main>`}
+ $('app').innerHTML=`<header class="hd"><div class="hd1">${BK?`<button class="back" onclick="${BK}" title="Kembali">${hx?'←':'←'}</button>`:''}<img class="lg" src="${LOGO}" alt="MySKD"><div class="ttl"><b>MySKD</b><span>${adm?'Panel Pemilik':cur?'Semangat belajar, '+e(capNm(cur))+'! 🔥':'Silakan masuk'}</span><span class="dt">${tglID()}</span></div>${hx}</div>${nav}</header><main>${inner}</main>`}
 function go(v){scrollTo(0,0);V=v;route()}
 
 /* ---------- info passing grade ---------- */
