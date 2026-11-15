@@ -60,3 +60,5 @@ async function loadQ(){ADM.rows={};if(ADM.cat)admCat(ADM.cat)}
  setTimeout(()=>{if(!a.querySelector('header,.hd'))a.innerHTML=box('Koneksi lambat','Server belum menjawab. Periksa internet lalu Muat Ulang.')},10000)})();
 __log('script utama jalan');addEventListener('hashchange',route);route();
 
+
+try{if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(function(){})}catch(e){}
